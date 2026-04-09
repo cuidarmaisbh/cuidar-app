@@ -1,0 +1,53 @@
+backend:
+  name: git-gateway
+  branch: main
+ 
+local_backend: true
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "content"
+    label: "Content"
+    files:
+      - file: "public/content.json"
+        label: "App Content"
+        name: "content"
+        fields:
+          - label: "Sections"
+            name: "sections"
+            widget: "list"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - label: "Pages"
+                name: "pages"
+                widget: "list"
+                fields:
+                  - { label: "ID", name: "id", widget: "string" }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - label: "Blocks"
+                    name: "blocks"
+                    widget: "list"
+                    types:
+                      - label: "Text"
+                        name: "text"
+                        widget: "object"
+                        fields:
+                          - { name: "type", default: "text", widget: "hidden" }
+                          - { name: "content", widget: "text" }
+
+                      - label: "Video"
+                        name: "video"
+                        widget: "object"
+                        fields:
+                          - { name: "type", default: "video", widget: "hidden" }
+                          - { name: "url", widget: "string" }
+
+                      - label: "Image"
+                        name: "image"
+                        widget: "object"
+                        fields:
+                          - { name: "type", default: "image", widget: "hidden" }
+                          - { name: "url", widget: "string" }
+                          - { name: "caption", widget: "string", required: false }
